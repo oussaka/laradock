@@ -175,6 +175,8 @@ services:
         - ./php-worker/supervisord.d:/etc/supervisord.d
       extra_hosts:
         - "dockerhost:${DOCKER_HOST_IP}"
+        # - "tms-front.local:${DOCKER_HOST_IP}"
+        # - "tms-api.local:${DOCKER_HOST_IP}"
       ports:
         - "${WORKSPACE_SSH_PORT}:22"
         - "${WORKSPACE_BROWSERSYNC_HOST_PORT}:3000"
@@ -336,6 +338,8 @@ services:
         - workspace
       extra_hosts:
         - "dockerhost:${DOCKER_HOST_IP}"
+      # ports:
+        # - "9002:9001"
       networks:
         - backend
 ### Laravel Horizon ############################################
@@ -396,8 +400,12 @@ services:
       depends_on:
         - php-fpm
       networks:
-        - frontend
-        - backend
+        frontend:
+         aliases:
+          - tms-api.local
+        backend:
+         aliases:
+          - tms-api.local
 
 ### Blackfire ########################################
     blackfire:
