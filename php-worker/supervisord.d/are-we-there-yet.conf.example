@@ -1,0 +1,13 @@
+[program:are_we_there_yet]
+command=php /var/www/areWeThereYet.php
+numprocs=1
+directory=/tmp
+autostart=true
+autorestart=true
+startsecs=5
+startretries=10
+redirect_stderr=false
+stdout_logfile=/var/www/are-we-there-yet.out.log
+stdout_capture_maxbytes=1MB
+stderr_logfile=/var/www/are-we-there-yet.error.log
+stderr_capture_maxbytes=1MB
